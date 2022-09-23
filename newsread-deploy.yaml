@@ -20,4 +20,8 @@ spec:
         env:
           - name: FLASK_APP
             value: run.py
+        envFrom:
+        - secretRef:
+            name: my-secrets
+            optional: false
 
