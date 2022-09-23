@@ -1,12 +1,13 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: mysql-set
+  namespace: default
+  name: mysql
 spec:
   selector:
     matchLabels:
       app: mysql
-  serviceName: "mysql"
+  serviceName: mysql
   replicas: 2
   template:
     metadata:
@@ -20,19 +21,15 @@ spec:
         ports:
         - containerPort: 3306
         volumeMounts:
-        - name: mysql-store
+        - name: database-vol
           mountPath: /var/lib/mysql
         envFrom:
          - secretRef:
              name: my-secrets
              optional: false
-
-  volumeClaimTemplates:
-  - metadata:
-      name: mysql-store
-    spec:
-      accessModes: ["ReadWriteOnce"]
-      storageClassName: "standard"
-      resources:
-        requests:
-          storage: 1Gi
+        ports:
+        - containerPort: 3306
+      volumes:
+      - name: database-vol
+        persistentVolumeClaim:
+          claimName: mysql-data-store-pvc
