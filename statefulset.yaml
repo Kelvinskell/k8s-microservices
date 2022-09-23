@@ -24,7 +24,7 @@ spec:
           mountPath: /var/lib/mysql
         envFrom:
          - secretRef:
-             name: mysql-secrets
+             name: my-secrets
              optional: false
 
   volumeClaimTemplates:
