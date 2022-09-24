@@ -2,42 +2,31 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ $.Release.Name }}
+  name: {{ $.Release.Name }}-{{ .name }}
   labels:
-    {{- include "ingress-demo-chart.labels" . | nindent 4 }}
+    app: {{ .labels.app }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
-  replicas: {{ .Values.replicaCount }}
+  replicas: {{ .replicaCount }}
   {{- end }}
   selector:
     matchLabels:
-      {{- include "ingress-demo-chart.selectorLabels" . | nindent 6 }}
+      {{ .matchLabels.app }}
   template:
     metadata:
-      {{- with .Values.podAnnotations }}
-      annotations:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
       labels:
-        {{- include "ingress-demo-chart.selectorLabels" . | nindent 8 }}
+        {{ .template.labels.app }}
     spec:
-      {{- with .Values.imagePullSecrets }}
-      imagePullSecrets:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      serviceAccountName: {{ include "ingress-demo-chart.serviceAccountName" . }}
-      securityContext:
-        {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
-        - name: {{ .Chart.Name }}
-          securityContext:
-            {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+        - name: {{ .containers.name }}
+          image: "{{ .containers.image.repository }}:{{ .containers.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          {{- if .ports }}
           ports:
             - name: http
               containerPort: 80
               protocol: TCP
+          {{- end }}
           livenessProbe:
             httpGet:
               path: /
@@ -46,18 +35,15 @@ spec:
             httpGet:
               path: /
               port: http
-          resources:
-            {{- toYaml .Values.resources | nindent 12 }}
-      {{- with .Values.nodeSelector }}
-      nodeSelector:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      {{- with .Values.affinity }}
-      affinity:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      {{- with .Values.tolerations }}
-      tolerations:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
+          {{- if .env }}
+          env:
+            - name: {{ .env.name }}
+              value: {{ .env.value }}
+          {{- end }}
+          {{- if .envFrom }}
+          envFrom:
+            secretkeyRef:
+              name: {{ .envFrom.name }}
+              optional: {{ .envFrom.optional }}
+          {{- end }}
 {{ end -}}
