@@ -36,9 +36,35 @@ securityContext: {}
   # runAsNonRoot: true
   # runAsUser: 1000
 
-service:
-  type: ClusterIP
+hello-service:
+  name: hello-world
   port: 80
+  labels:
+    name: hello-world
+  targetPort: 8080
+  selector:
+    app: hello-world
+  type: NodePort
+
+newsread-service:
+  name: newsread
+  port: 80
+  labels:
+    app: newsread
+  targetPort: 5000
+  selector:
+    app: newsread
+  type: NodePort 
+
+statefulset-service:
+  name: mysql
+  port: 3306
+  labels:
+    app: mysql
+  ClusterIP: None
+  selector:
+    app: mysql
+
 
 ingress:
   enabled: false
