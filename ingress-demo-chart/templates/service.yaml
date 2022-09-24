@@ -1,15 +1,29 @@
+{{- range list .Values.hello-service .Values.newsread-service .Values.statefulset-service -}}
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "ingress-demo-chart.fullname" . }}
+  name: {{ .name }}
+  {{- if .labels.name }}
   labels:
-    {{- include "ingress-demo-chart.labels" . | nindent 4 }}
+    name: {{ .labels.name }}
+  {{- else if .labels.app }}
+  labels:
+    app: {{ .labels.app }}
+  {{- end }}
 spec:
-  type: {{ .Values.service.type }}
+  {{- if .type }}
+  type: {{ .type }}
+  {{- end }}
   ports:
-    - port: {{ .Values.service.port }}
-      targetPort: http
+    - port: {{ .port }}
+      {{ if .targetPort }}
+      targetPort: {{ .targetPort }}
+      {{- end }}
       protocol: TCP
       name: http
   selector:
-    {{- include "ingress-demo-chart.selectorLabels" . | nindent 4 }}
+    app: {{ .selector.app }}
+  {{- if .ClusterIP }}
+  ClusterIP: {{ .ClusterIP }}
+  {{- end }}
+{{ end -}}
