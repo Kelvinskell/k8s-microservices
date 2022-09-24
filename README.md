@@ -14,5 +14,10 @@ This project mimics a microservices application and uses kubernetes ingress to p
 The helm package contains everything needed to implement this application, but first, you need to provision  Kubernetes Service (EKS) cluster on your account and install theaws load balancer controller - on your AWS account.
 
 ## How To Use
+**Prerequisite:** You must have *kubectl* installed on your local system.
+
 **Step 1:** Create an EKS cluster on your account
-**Step 2:** If not present, create an AWS IAM Open ID Connect (OIDC) for your cluster. Here is a great instruction manual on how to get that done.
+
+**Step 2:** If not present, create an AWS IAM Open ID Connect (OIDC) for your cluster. [Here is a great instruction manual on how to get that done.](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html)
+
+**Step 3**: [Install the AWS Load Balancer Controller add-on](https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html)
