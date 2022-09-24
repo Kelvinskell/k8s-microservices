@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: {{ Release.name }}-ingress-demo
+  name: {{ .Release.name }}-ingress-demo
 spec:
   ingressClassName: aws-ingress
   rules:

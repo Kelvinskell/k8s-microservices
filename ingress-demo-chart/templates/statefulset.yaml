@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   namespace: default
-  name: {{ Release.Name }}-mysql
+  name: {{ .Release.Name }}-mysql
 spec:
   selector:
     matchLabels:
