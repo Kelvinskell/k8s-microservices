@@ -16,10 +16,16 @@ The helm package contains everything needed to implement this application, but f
 ## How To Use
 **Prerequisite:** You must have *kubectl* installed on your local system.
 
+**S
+
 **Step 1:** Create an EKS cluster on your account
 
 **Step 2:** If not present, create an AWS IAM Open ID Connect (OIDC) for your cluster. [Here is a great instruction manual on how to get that done.](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html)
 
 **Step 3**: [Install the AWS Load Balancer Controller add-on](https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html)
 
-**Note:** If you are to follow the procedure above to create your ingress controller, you should adviceably use *kubectl* instead of *eksctl*. This is because the manifest for creating a service account is already part of this repository and you do not want to have duplicate manifests for a single service account. However, navigate to the *ingress-demo/templates* directory and edit the *alb
+**Note:** If you are to follow the procedure above to create your ingress controller, you should adviceably use *kubectl* instead of *eksctl*. This is because the manifest for creating a service account is already part of this repository and you do not want to have duplicate manifests for a single service account. However, navigate to the *ingress-demo/templates* directory and edit the `alb-controller-service-acct.yaml` file.
+  - replace the existing value for *annotations* with the necessary values that correspond to your own account and the IAM Role you must have created in the previous step. That is, in the following value for *annotations:* `eks.amazonaws.com/role-arn: arn:aws:iam::538578370230:role/AmazonEKSLoadBalancerControllerRole`, *538578370230* should be replaced with your own AWS account ID.
+  -  Follow the remaining steps as described in the documentation.
+  -  To test if your ingress controller has been properly installed, execute `kubectl get deployment -n kube-system aws-load-balancer-controller`
+  
