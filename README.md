@@ -1,5 +1,6 @@
 # Brief Overview
 This project Implements a microservices architecture for an application using python, kubernetes and helm.
+
 Basically, this project demonstrates how to use ingress to perform path-based routing for multiple services within a cluster.  
  
 There are three total application images here:
