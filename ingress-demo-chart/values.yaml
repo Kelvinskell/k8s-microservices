@@ -11,7 +11,7 @@ serviceAccount:
   # If not set and create is true, a name is generated using the fullname template
   name: aws-load-balancer-controller
 
-hello-service:
+helloservice:
   name: hello-world
   port: 80
   labels:
@@ -21,7 +21,7 @@ hello-service:
     app: hello-world
   type: NodePort
 
-newsread-service:
+newsreadservice:
   name: newsread
   port: 80
   labels:
@@ -31,7 +31,7 @@ newsread-service:
     app: newsread
   type: NodePort 
 
-statefulset-service:
+statefulsetservice:
   name: mysql
   port: 3306
   labels:
@@ -40,7 +40,7 @@ statefulset-service:
   selector:
     app: mysql
 
-hello-world-dep:
+hello:
   name: hello-world
   labels:
     app: hello-world
@@ -56,7 +56,7 @@ hello-world-dep:
       repository: gcr.io/google-samples/hello-app
       tag: "1.0"
 
-newsread-dep:
+newsread:
   name: newsread
   labels:
     app: newsread
@@ -69,7 +69,7 @@ newsread-dep:
   containers:
     name: newsread
     image:
-      repository: kelvinskell/newsread-etra
+      repository: kelvinskell/newsread-extra
       tag: latest
   env:
     name: FLASK_APP
@@ -80,6 +80,9 @@ newsread-dep:
 
 statefulset:
   replicaCount: 2
+
+PV:
+  hostname: ip-192-168-127-171.ec2.internal
 
 tolerations: []
 
