@@ -33,4 +33,11 @@ The helm package contains everything needed to implement this application, but f
   -  To test if your ingress controller has been properly installed, execute `kubectl get deployment -n kube-system aws-load-balancer-controller`
 
 **Step 5:** Make sure you are in the parent directory of this repository (which you must have cloned). Execute `helm install ingress-demo-chart`
-  
+
+ **Happy Helming!** 
+
+PS: In the near future, I am going to add a terraform script to this project to automate the provisioning of both the EKS Cluster and AWS Ingress Controller. 
+I will update this repository when I'm done with it. 
+
+
+
