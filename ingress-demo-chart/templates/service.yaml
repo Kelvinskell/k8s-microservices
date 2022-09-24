@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .name }}
+  name: {{ .Release.Name}}-{{ .name }}
   {{- if .labels.name }}
   labels:
     name: {{ .labels.name }}
