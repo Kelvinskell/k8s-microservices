@@ -21,4 +21,5 @@ The helm package contains everything needed to implement this application, but f
 **Step 2:** If not present, create an AWS IAM Open ID Connect (OIDC) for your cluster. [Here is a great instruction manual on how to get that done.](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html)
 
 **Step 3**: [Install the AWS Load Balancer Controller add-on](https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html)
-**Note:**
+
+**Note:** If you are to follow the procedure above to create your ingress controller, you should adviceably use *kubectl* instead of *eksctl*. This is because the manifest for creating a service account is already part of this repository and you do not want to have duplicate manifests for a single service account. However, navigate to the *ingress-demo/templates* directory and edit the *alb
