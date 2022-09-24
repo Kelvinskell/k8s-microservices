@@ -2,13 +2,13 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   namespace: default
-  name: mysql
+  name: {{ Release.Name }}-mysql
 spec:
   selector:
     matchLabels:
       app: mysql
   serviceName: mysql
-  replicas: 2
+  replicas: {{ .Values.statefulset.replicaCount }}
   template:
     metadata:
       labels:
