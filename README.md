@@ -1,8 +1,8 @@
 # Brief Overview
-This project demonstrates how to Implement a microservices architecture for an application using python, kubernetes and helm.
- This project implements a kubernetes cluster, packaged using helm.
+This project Implements a microservices architecture for an application using python, kubernetes and helm.
+Basically, this project demonstrates how to use ingress to perform path-based routing for multiple services within a cluster.  
  
- There are three total application images here:
+There are three total application images here:
  - `kelvinskell/newsread-extra:` A python flask web application which serves as a news contet aggregator. This particular image is a stripped down version of `kelvinskell/newsread`, which is the original flask application. Both of these images are hosted on my DockerHub repository
  - `mysql:5.7:` This is the database image used for the flask application. It is implemented in this project as a **Statefulset**.
  - `gcr.io/google-samples/hello-app`: A simple hello world image found on the Google container registry.
