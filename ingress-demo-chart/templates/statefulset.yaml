@@ -25,7 +25,7 @@ spec:
           mountPath: /var/lib/mysql
         envFrom:
          - secretRef:
-             name: my-secrets
+             name: {{ .Release.Name }}-my-secrets
              optional: false
         ports:
         - containerPort: 3306

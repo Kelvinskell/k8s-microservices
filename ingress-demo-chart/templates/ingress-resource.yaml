@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: {{ .Release.name }}-ingress-demo
+  name: ingress-demo
 spec:
   ingressClassName: aws-ingress
   rules:
@@ -12,13 +12,13 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: {{ Release.Name }}-newsread
+                name: {{ .Release.Name }}-newsread
                 port:
                   number: 80
           - path: /hello
             pathType: Prefix
             backend:
               service:
-                name: {{ Release.Name }}-hello-world
+                name: {{ .Release.Name }}-hello-world
                 port:
                   number: 80

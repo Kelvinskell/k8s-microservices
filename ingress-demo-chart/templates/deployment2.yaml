@@ -1,4 +1,4 @@
-{{- range list .Values.hello -}}
+{{- range list .Values.newsread -}}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -32,8 +32,8 @@ spec:
           {{- end }}
           {{- if .envFrom }}
           envFrom:
-            - secretRef:
-                name: {{ $.Release.Name }}-{{ .envFrom.name }}
-                optional: {{ .envFrom.optional }}
+          - secretRef:
+              name: {{ $.Release.Name }}-{{ .envFrom.name }}
+              optional: {{ .envFrom.optional }}
           {{- end }}
 {{ end -}}
