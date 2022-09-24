@@ -7,4 +7,4 @@ metadata:
   name: {{ .Release.Name }}-{{ .Values.serviceAccount.name }}
   namespace: kube-system
   annotations:
-    eks.amazonaws.com/role-arn: arn:aws:iam::538578370232:role/AmazonEKSLoadBalancerControllerRole
+    eks.amazonaws.com/role-arn: arn:aws:iam::538578370230:role/AmazonEKSLoadBalancerControllerRole
